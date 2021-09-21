@@ -9,13 +9,19 @@ function createGrid(squareNum) {
     }
 }
 
+function changeColor(event) {
+    event.target.style.backgroundColor = "black";
+}
+
 function mouseClicked() {
-    console.log("clicking");
     boxes.forEach((box) => {
-        console.log("looping")
-        box.addEventListener('mouseover', function(event) {
-            event.target.style.backgroundColor = "black";
-        });
+        box.addEventListener('mouseenter', changeColor);
+    });
+}
+
+function stopClick() {
+    boxes.forEach((box) => {
+        box.removeEventListener('mouseenter', changeColor);
     });
 }
 
@@ -31,11 +37,5 @@ createGrid(squares);
 
 const boxes = document.querySelectorAll('.grid-item');
 
-gridContainer.addEventListener('mousedown', function(){
-    timer = setInterval(mouseClicked, 100);
-})
-
-gridContainer.addEventListener('mouseup', function(){
-    clearInterval(timer);
-    console.log('done');
-})
+gridContainer.addEventListener('mousedown', mouseClicked);
+gridContainer.addEventListener('mouseup', stopClick);
