@@ -37,9 +37,9 @@ function colorRainbow() {
     rainbow = true;
 }
 
-function colorCustom() {
+function eraser() {
     rainbow = false;
-    color = 'green';
+    color = 'white';
 }
 
 function resize() {
@@ -54,7 +54,7 @@ function clearScreen() {
     createGrid(squares);
 }
 
-let squares = 0;
+let squares = 10;
 let color = 'black';
 let timer;
 let rainbow = false;
@@ -63,18 +63,14 @@ let colorCounter = 0;
 let gridContainer = document.querySelector(".grid-container");
 let buttonBlack = document.querySelector(".btn-black");
 let buttonRainbow = document.querySelector(".btn-rainbow");
-let buttonCustom = document.querySelector(".btn-custom");
+let buttonEraser = document.querySelector(".btn-eraser");
 let buttonSize = document.querySelector(".btn-size");
 let buttonClearScreen = document.querySelector(".btn-clear-screen");
 let boxes;
 
-while (squares <= 0 || squares > 50 ) {
-    squares = prompt(`How many sqaures per side? (1-50)`);
-}
-
 createGrid(squares);
 buttonBlack.addEventListener('click', colorBlack);
 buttonRainbow.addEventListener('click', colorRainbow);
-buttonCustom.addEventListener('click', colorCustom)
+buttonEraser.addEventListener('click', eraser)
 buttonSize.addEventListener('click', resize);
 buttonClearScreen.addEventListener('click', clearScreen);

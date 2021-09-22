@@ -7,6 +7,16 @@
     transform: translateY(-200px);
 }
 
+body {
+    margin: 0;
+    background: seashell;
+}
+
+h1 {
+    transform: translateY(250px);
+    text-align: center;
+}
+
 .btn {
     text-align: center;
     padding: 10px 0;
@@ -16,7 +26,7 @@
     color: var(--btn-color, black);
     height: 25px;
     width: 150px;
-    transition: color 300ms linear;
+    transition: color 100ms linear;
 }
 
 .btn-black {
@@ -31,7 +41,7 @@
     transform: translate(500px, 403.5px);
 }
 
-.btn-custom {
+.btn-eraser {
     --btn-color: rgb(199, 35, 191);
     --transform-origin: center;
     transform: translate(500px, 471px);
@@ -62,7 +72,7 @@
     background: var(--btn-color);
     transform: scale(0, 0);
     transform-origin: var(--transform-origin, center);
-    transition: transform 300ms ease;
+    transition: transform 100ms ease;
 }
 
 .btn:hover::after {
@@ -74,10 +84,9 @@
     grid-template-rows: repeat(var(--squares), var(--max-width));
     grid-template-columns: repeat(var(--squares), var(--max-width));
     grid-auto-rows: 200px;
-    transform: translate(692px, 100px);
+    transform: translate(710px, 100px);
     height: 500px;
     width: 500px;
-    border: black solid;
 }
 
 .grid-item {
