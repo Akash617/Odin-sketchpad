@@ -10,25 +10,39 @@ function createGrid(squareNum) {
     }
 
     boxes = document.querySelectorAll('.grid-item');
+    mouseClicked();
 }
 
-function changeColor(event) {
-    event.target.style.backgroundColor = "black";
+function mouseOver(event) {
+    if (rainbow) {
+        color = rainbowColors[colorCounter];
+        colorCounter = (colorCounter+1)%7;
+    }
+
+    event.target.style.backgroundColor = color;
 }
 
 function mouseClicked() {
     boxes.forEach((box) => {
-        box.addEventListener('mouseenter', changeColor);
+        box.addEventListener('mouseenter', mouseOver);
     });
 }
 
-function stopClick() {
-    boxes.forEach((box) => {
-        box.removeEventListener('mouseenter', changeColor);
-    });
+function colorBlack() {
+    rainbow = false;
+    color = 'black';
 }
 
-function clearScreen() {
+function colorRainbow() {
+    rainbow = true;
+}
+
+function eraser() {
+    rainbow = false;
+    color = 'white';
+}
+
+function resize() {
     squares = 0;
     while (squares <= 0 || squares > 50 ) {
         squares = prompt(`How many sqaures per side? (1-50)`);
@@ -36,18 +50,27 @@ function clearScreen() {
     createGrid(squares);
 }
 
-let squares = 0;
-let timer;
-let gridContainer = document.querySelector(".grid-container");
-let button = document.querySelector("button");
-let boxes;
-
-while (squares <= 0 || squares > 50 ) {
-    squares = prompt(`How many sqaures per side? (1-50)`);
+function clearScreen() {
+    createGrid(squares);
 }
 
-createGrid(squares);
+let squares = 10;
+let color = 'black';
+let timer;
+let rainbow = false;
+const rainbowColors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'];
+let colorCounter = 0;
+let gridContainer = document.querySelector(".grid-container");
+let buttonBlack = document.querySelector(".btn-black");
+let buttonRainbow = document.querySelector(".btn-rainbow");
+let buttonEraser = document.querySelector(".btn-eraser");
+let buttonSize = document.querySelector(".btn-size");
+let buttonClearScreen = document.querySelector(".btn-clear-screen");
+let boxes;
 
-button.addEventListener('click', clearScreen);
-gridContainer.addEventListener('mousedown', mouseClicked);
-gridContainer.addEventListener('mouseup', stopClick);
+createGrid(squares);
+buttonBlack.addEventListener('click', colorBlack);
+buttonRainbow.addEventListener('click', colorRainbow);
+buttonEraser.addEventListener('click', eraser)
+buttonSize.addEventListener('click', resize);
+buttonClearScreen.addEventListener('click', clearScreen);
