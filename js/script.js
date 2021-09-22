@@ -10,25 +10,39 @@ function createGrid(squareNum) {
     }
 
     boxes = document.querySelectorAll('.grid-item');
+    mouseClicked();
 }
 
-function changeColor(event) {
-    event.target.style.backgroundColor = "black";
+function mouseOver(event) {
+    if (rainbow) {
+        color = rainbowColors[colorCounter];
+        colorCounter = (colorCounter+1)%7;
+    }
+
+    event.target.style.backgroundColor = color;
 }
 
 function mouseClicked() {
     boxes.forEach((box) => {
-        box.addEventListener('mouseenter', changeColor);
+        box.addEventListener('mouseenter', mouseOver);
     });
 }
 
-function stopClick() {
-    boxes.forEach((box) => {
-        box.removeEventListener('mouseenter', changeColor);
-    });
+function colorBlack() {
+    rainbow = false;
+    color = 'black';
 }
 
-function clearScreen() {
+function colorRainbow() {
+    rainbow = true;
+}
+
+function colorCustom() {
+    rainbow = false;
+    color = 'green';
+}
+
+function resize() {
     squares = 0;
     while (squares <= 0 || squares > 50 ) {
         squares = prompt(`How many sqaures per side? (1-50)`);
@@ -36,10 +50,22 @@ function clearScreen() {
     createGrid(squares);
 }
 
+function clearScreen() {
+    createGrid(squares);
+}
+
 let squares = 0;
+let color = 'black';
 let timer;
+let rainbow = false;
+const rainbowColors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'];
+let colorCounter = 0;
 let gridContainer = document.querySelector(".grid-container");
-let button = document.querySelector("button");
+let buttonBlack = document.querySelector(".btn-black");
+let buttonRainbow = document.querySelector(".btn-rainbow");
+let buttonCustom = document.querySelector(".btn-custom");
+let buttonSize = document.querySelector(".btn-size");
+let buttonClearScreen = document.querySelector(".btn-clear-screen");
 let boxes;
 
 while (squares <= 0 || squares > 50 ) {
@@ -47,7 +73,8 @@ while (squares <= 0 || squares > 50 ) {
 }
 
 createGrid(squares);
-
-button.addEventListener('click', clearScreen);
-gridContainer.addEventListener('mousedown', mouseClicked);
-gridContainer.addEventListener('mouseup', stopClick);
+buttonBlack.addEventListener('click', colorBlack);
+buttonRainbow.addEventListener('click', colorRainbow);
+buttonCustom.addEventListener('click', colorCustom)
+buttonSize.addEventListener('click', resize);
+buttonClearScreen.addEventListener('click', clearScreen);

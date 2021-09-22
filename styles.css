@@ -2,23 +2,85 @@
 
 :root {
     --squares: 0;
-    --max-width: calc(750px/var(--squares));
+    --max-width: calc(500px/var(--squares));
+    box-sizing: border-box;
+    transform: translateY(-200px);
 }
 
-.button-container {
+.btn {
     text-align: center;
     padding: 10px 0;
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--btn-color, black);
+    color: var(--btn-color, black);
+    height: 25px;
+    width: 150px;
+    transition: color 300ms linear;
 }
+
+.btn-black {
+    --btn-color: black;
+    --transform-origin: center;
+    transform: translate(500px, 336px);
+}
+
+.btn-rainbow {
+    --btn-color: rgb(41, 90, 194);
+    --transform-origin: center;
+    transform: translate(500px, 403.5px);
+}
+
+.btn-custom {
+    --btn-color: rgb(199, 35, 191);
+    --transform-origin: center;
+    transform: translate(500px, 471px);
+}
+
+.btn-size {
+    --btn-color: rgb(139, 11, 11);
+    --transform-origin: center;
+    transform: translate(500px, 538.5px);
+}
+
+.btn-clear-screen {
+    --btn-color: black;
+    --transform-origin: center;
+    transform: translate(500px, 606px);
+}
+
+.btn:hover,
+.btn:focus { 
+  color: white;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--btn-color);
+    transform: scale(0, 0);
+    transform-origin: var(--transform-origin, center);
+    transition: transform 300ms ease;
+}
+
+.btn:hover::after {
+    transform: scale(1, 1);
+  }
 
 .grid-container {
     display: grid;
     grid-template-rows: repeat(var(--squares), var(--max-width));
     grid-template-columns: repeat(var(--squares), var(--max-width));
     grid-auto-rows: 200px;
-    padding: 0 570px;
+    transform: translate(692px, 100px);
+    height: 500px;
+    width: 500px;
+    border: black solid;
 }
 
 .grid-item {
-    border: solid;
     background-color: white;
+    border: 1px solid rgba(0, 0, 0, 10%);
 }
